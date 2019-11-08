@@ -32,25 +32,28 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
     @RequestMapping("index")
-    public String index(){
+    public String index() {
         return "index";
     }
+
     @RequestMapping("start")
-    public String start(){
+    public String start() {
         return "login";
     }
+
     @RequestMapping("login")
-    public String login(User user){
+    public String login(User user) {
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUsername(),user.getPassword());
-        try{
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+        try {
             subject.login(usernamePasswordToken);
-            if (subject.isAuthenticated()){
+            if (subject.isAuthenticated()) {
                 return "index";
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
